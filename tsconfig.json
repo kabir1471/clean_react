@@ -19,7 +19,14 @@
       "noEmit": true,
       "jsx": "react-jsx",
 	  "rootDir": "src",
-	  "baseUrl": "src"
+	  "baseUrl": "src",
+     "paths": {
+      "@domain/*": ["domain/*"], 
+      "@data/*": ["data/*"],
+     }
+   },
+    "ts-node": {
+      "require": ["tsconfig-paths/register"]
    },
    "include": [
 	"src"
