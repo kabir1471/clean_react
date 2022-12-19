@@ -14,11 +14,11 @@ const Input: React.FC<Props> = (props: Props) => {
   }
 
   const getStatus = (): string => {
-    return '*'
+    return error ? '*' : 'T'
   }
 
   const getTitle = (): string => {
-    return error as string
+    return error as string || 'All Good'
   }
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
