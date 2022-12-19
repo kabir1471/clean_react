@@ -111,6 +111,7 @@ describe('Login Component', () => {
     simulateValidSubmit(sut)
     expect(authenticationSpy.callsCount).toEqual(1)
   })
+
   test('Should not call Authentication when form is invalid', () => {
     const validationError = faker.random.words()
     const { sut, authenticationSpy } = makeSut({ validationError })
@@ -118,6 +119,7 @@ describe('Login Component', () => {
     fireEvent.submit(sut.getByTestId('form'))
     expect(authenticationSpy.callsCount).toBe(0)
   })
+
   test('Should present error if Authentication fails', async () => {
     const { sut, authenticationSpy } = makeSut()
     const error = new InvalidCredentialsError()
