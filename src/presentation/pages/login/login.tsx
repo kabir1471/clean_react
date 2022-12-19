@@ -3,7 +3,7 @@ import Styles from './login-styles.scss'
 import { LoginHeader, Footer, Input, FormStatus } from '../../components'
 import Context from '../../contexts/form/form-context'
 
-type StateProps = {
+export type StateProps = {
   isLoading: boolean
   errorMessage: string
 }
@@ -18,7 +18,7 @@ const login: React.FC = () => {
       <h2>Login</h2>
         <Input type={'email'} name="email" placeholder='Enter your email' />
         <Input type={'password'} name="password" placeholder='Enter your password' />
-      <button type='submit' className={Styles.submit}>Login</button>
+      <button data-testid="submit" disabled type='submit' className={Styles.submit}>Login</button>
       <span className={Styles.link}>Create Account</span>
       <FormStatus />
     </form>
