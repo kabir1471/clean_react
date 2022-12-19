@@ -7,6 +7,7 @@ type StateProps = {
   emailError: string
   passwordError: string
   email: string
+  password: string
 }
 
 type ContextProps = {
