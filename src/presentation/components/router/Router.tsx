@@ -6,7 +6,7 @@ import '../../styles/global.scss'
 const Router: React.FC = () => {
   return <BrowserRouter>
   <Routes>
-<Route path='/login' element={<Login />} />
+<Route path='/' element={<Login />} />
   </Routes>
   </BrowserRouter>
 }
