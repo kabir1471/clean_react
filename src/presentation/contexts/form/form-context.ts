@@ -3,9 +3,15 @@ import { createContext } from 'react'
 
 type StateProps = {
   isLoading: boolean
-  errorMessage: string
+  mainError: string
   emailError: string
   passwordError: string
+  email: string
 }
 
-export default createContext({} as StateProps)
+type ContextProps = {
+  state: StateProps
+  setState: (values: StateProps) => void
+}
+
+export default createContext({} as ContextProps)
