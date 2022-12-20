@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/consistent-type-assertions */
 import React from 'react'
-import { render, RenderResult } from '@testing-library/react'
+import { fireEvent, render, RenderResult } from '@testing-library/react'
 import Input from './Input'
 import Context, { ContextProps } from '../../../presentation/contexts/form/form-context'
 
@@ -22,5 +22,11 @@ describe('Input Component', () => {
     const sut = makeSut()
     const input = sut.getByTestId('field') as HTMLInputElement
     expect(input.readOnly).toBe(true)
+  })
+  test('should remove readonly on focus', () => {
+    const sut = makeSut()
+    const input = sut.getByTestId('field') as HTMLInputElement
+    fireEvent.focus(input)
+    expect(input.readOnly).toBe(false)
   })
 })
