@@ -1,4 +1,4 @@
-
+const API_URL = 'http://fordevs.herokuapp.com/api'
 export const makeApiUrl = (path: string): string => {
-  return `http://fordevs.herokuapp.com/api${path}`
+  return `${API_URL}${path}`
 }
