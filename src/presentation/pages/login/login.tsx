@@ -5,7 +5,7 @@ import { LoginHeader, Footer, Input, FormStatus } from '../../components'
 import Context from '../../contexts/form/form-context'
 import { Validation } from '../../../presentation/protocols/validation'
 import { Authentication } from '../../../domain/usecases/authentication'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 type Props = {
   validation: Validation
@@ -13,7 +13,6 @@ type Props = {
 }
 
 const login: React.FC<Props> = ({ validation, authentication }: Props) => {
-  const navigate = useNavigate()
   const [state, setState] = useState({
     isLoading: false,
     mainError: '',
@@ -38,7 +37,6 @@ const login: React.FC<Props> = ({ validation, authentication }: Props) => {
       setState({ ...state, isLoading: true })
       const account = await authentication.auth({ email: state.email, password: state.password })
       localStorage.setItem('accessToken', account.accessToken)
-      navigate('/')
     } catch (e: any) {
       setState({ ...state, isLoading: false, mainError: e.message })
     }

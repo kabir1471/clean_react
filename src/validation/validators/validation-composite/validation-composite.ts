@@ -1,3 +1,5 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
+/* eslint-disable no-tabs */
 import { Validation } from '../../../presentation/protocols/validation'
 import { FieldValidation } from '../../protocols/field-validation'
 
@@ -9,8 +11,8 @@ export class ValidationComposite implements Validation {
   }
 
   validate (fieldName: string, fieldValue: string): string {
-    this.validators.filter(v => v.field === fieldName)
-    for (const validator of this.validators) {
+    const validators = this.validators.filter(v => v.field === fieldName)
+    for (const validator of validators) {
       const error = validator.validate(fieldValue)
 	  if (error) {
         return error.message
