@@ -10,7 +10,7 @@ type StateProps = {
   password: string
 }
 
-type ContextProps = {
+export type ContextProps = {
   state: StateProps
   setState: (values: StateProps) => void
 }
