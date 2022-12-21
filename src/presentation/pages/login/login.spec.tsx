@@ -6,11 +6,13 @@ import { Login } from '../'
 import { ValidationStub } from '../../../presentation/test/mock-validation'
 import { AuthenticationSpy } from '../../../presentation/test/mock-authentication'
 import { MemoryRouter } from 'react-router-dom'
+import { SaveAccessTokenMock } from '../../../presentation/test/mock-save-access-token'
 // import { InvalidCredentialsError } from '../../../domain/errors/invalid-credentials-error'
 
 type SutTypes = {
   sut: RenderResult
   authenticationSpy: AuthenticationSpy
+  saveAccessToken: SaveAccessTokenMock
 }
 type SutParams = {
   validationError: string
@@ -19,6 +21,7 @@ type SutParams = {
 const makeSut = (params?: SutParams): SutTypes => {
   const validationStub = new ValidationStub()
   const authenticationSpy = new AuthenticationSpy()
+  const saveAccessTokenMock = new SaveAccessTokenMock()
   validationStub.errorMessage = params?.validationError ?? ''
   const sut = render(
     <MemoryRouter>
@@ -27,7 +30,8 @@ const makeSut = (params?: SutParams): SutTypes => {
   )
   return {
     sut,
-    authenticationSpy
+    authenticationSpy,
+    saveAccessTokenMock
   }
 }
 
@@ -72,9 +76,6 @@ const testButtonIsDisabled = (sut: RenderResult, fieldName: string, isDisabled: 
 
 describe('Login Component', () => {
   afterEach(cleanup)
-  beforeEach(() => {
-    localStorage.clear()
-  })
   test('Should start with initial state', () => {
     const validationError = faker.random.words()
     const { sut } = makeSut({ validationError })
@@ -152,10 +153,10 @@ describe('Login Component', () => {
   //   testErrorWrapChildCount(sut, 1)
   // })
 
-  test('Should add access token to local storage on success', async () => {
-    const { sut, authenticationSpy } = makeSut()
+  test('Should call SaveAccessToken on success', async () => {
+    const { sut, authenticationSpy, saveAccessTokenMock } = makeSut()
     await simulateValidSubmit(sut)
-    expect(localStorage.setItem).toHaveBeenCalledWith('accessToken', authenticationSpy.account.accessToken)
+    expect(saveAccessTokenMock.accessToken).toBe(authenticationSpy.account.accessToken)
     // expect(location.pathname).toBe('/')
   })
   // test('Should should go to signup page', async () => {
