@@ -6,13 +6,15 @@ import Context from '../../contexts/form/form-context'
 import { Validation } from '../../../presentation/protocols/validation'
 import { Authentication } from '../../../domain/usecases/authentication'
 import { Link } from 'react-router-dom'
+import { SaveAccessToken } from '../../../domain/usecases/save-access-token'
 
 type Props = {
   validation: Validation
   authentication: Authentication
+  saveAccessToken: SaveAccessToken
 }
 
-const login: React.FC<Props> = ({ validation, authentication }: Props) => {
+const login: React.FC<Props> = ({ validation, authentication, saveAccessToken }: Props) => {
   const [state, setState] = useState({
     isLoading: false,
     mainError: '',
@@ -36,7 +38,7 @@ const login: React.FC<Props> = ({ validation, authentication }: Props) => {
       if (state.isLoading || state.emailError || state.passwordError) return
       setState({ ...state, isLoading: true })
       const account = await authentication.auth({ email: state.email, password: state.password })
-      localStorage.setItem('accessToken', account.accessToken)
+      await saveAccessToken.save(account.accessToken)
     } catch (e: any) {
       setState({ ...state, isLoading: false, mainError: e.message })
     }

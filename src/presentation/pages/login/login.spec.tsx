@@ -12,7 +12,7 @@ import { SaveAccessTokenMock } from '../../../presentation/test/mock-save-access
 type SutTypes = {
   sut: RenderResult
   authenticationSpy: AuthenticationSpy
-  saveAccessToken: SaveAccessTokenMock
+  saveAccessTokenMock: SaveAccessTokenMock
 }
 type SutParams = {
   validationError: string
@@ -25,7 +25,7 @@ const makeSut = (params?: SutParams): SutTypes => {
   validationStub.errorMessage = params?.validationError ?? ''
   const sut = render(
     <MemoryRouter>
-      <Login validation={validationStub} authentication={authenticationSpy} />
+      <Login validation={validationStub} authentication={authenticationSpy} saveAccessToken={saveAccessTokenMock} />
       </MemoryRouter>
   )
   return {
