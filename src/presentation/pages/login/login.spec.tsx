@@ -7,6 +7,7 @@ import { ValidationStub } from '../../../presentation/test/mock-validation'
 import { AuthenticationSpy } from '../../../presentation/test/mock-authentication'
 import { MemoryRouter } from 'react-router-dom'
 import { SaveAccessTokenMock } from '../../../presentation/test/mock-save-access-token'
+// import { InvalidCredentialsError } from '@/domain/errors/invalid-credentials-error'
 // import { InvalidCredentialsError } from '../../../domain/errors/invalid-credentials-error'
 
 type SutTypes = {
@@ -159,6 +160,14 @@ describe('Login Component', () => {
     expect(saveAccessTokenMock.accessToken).toBe(authenticationSpy.account.accessToken)
     // expect(location.pathname).toBe('/')
   })
+  // test('Should present error if SaveAccessToken fails', async () => {
+  //   const { sut, saveAccessTokenMock } = makeSut()
+  //   const error = new InvalidCredentialsError()
+  //   jest.spyOn(saveAccessTokenMock, 'save').mockReturnValueOnce(Promise.reject(error))
+  //   await simulateValidSubmit(sut)
+  //   testElementText(sut, 'main-error', error.message)
+  //   testErrorWrapChildCount(sut, 1)
+  // })
   // test('Should should go to signup page', async () => {
   //   const { sut } = makeSut()
   //   const register = sut.getByTestId('signup')
